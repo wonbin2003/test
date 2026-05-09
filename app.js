@@ -14,7 +14,7 @@
    ============================== */
 
 // 게임 시간: 3분 = 180초
-const EXPERIMENT_SECONDS = 3;
+const EXPERIMENT_SECONDS = 10;
 
 // 알림은 5초 동안 화면에 표시
 const NOTIFICATION_VISIBLE_MS = 5000;
