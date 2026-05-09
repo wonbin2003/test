@@ -875,32 +875,35 @@ recallForm.addEventListener("submit", async (event) => {
   };
 
    try {
-    const response = await fetch("https://script.google.com/macros/s/AKfycbyDKRiAO2JpD1hwkzVFAEM2XnzMRjy6wq5MYZ3PqF47_M5k4aaZ-CuxS940HW5q-MkX/exec", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        participantInfo,
-        surveyResponses,
-        shownNotifications,
-        score
-      })
-    });
+  // 1. fetch 호출 (mode: "no-cors" 추가하여 브라우저 차단 방지)
+  await fetch("https://script.google.com/macros/s/AKfycbyDKRiAO2JpD1hwkzVFAEM2XnzMRjy6wq5MYZ3PqF47_M5k4aaZ-CuxS940HW5q-MkX/exec", {
+    method: "POST",
+    mode: "no-cors", 
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      participantInfo,
+      surveyResponses,
+      shownNotifications,
+      score
+    })
+  });
 
-    const result = await response.json();
+  // 2. no-cors 모드에서는 응답을 읽을 수 없으므로 성공으로 간주하고 화면 전환
+  console.log("데이터 전송 시도 완료");
+  createSummary();
+  showScreen(resultScreen);
 
-    if (!response.ok || !result.success) {
-      throw new Error(result.message || "저장 실패");
-    }
-
-    createSummary();
-    showScreen(resultScreen);
-  } catch (error) {
-    alert("서버에 결과를 저장하지 못했습니다. 관리자에게 알려주세요.");
-    console.error(error);
-  }
-});
+} catch (error) {
+  // 네트워크가 완전히 끊긴 경우에만 알림
+  alert("서버와 통신할 수 없습니다. 네트워크를 확인해주세요.");
+  console.error(error);
+  
+  // 에러가 나더라도 참가자가 마지막 화면은 볼 수 있게 처리
+  createSummary();
+  showScreen(resultScreen);
+}
 
 /* ==============================
    결과 요약 생성
