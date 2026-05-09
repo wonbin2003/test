@@ -874,10 +874,9 @@ recallForm.addEventListener("submit", async (event) => {
     attentionDemand: formData.get("attentionDemand") || ""
   };
 
-  try {
+   try {
     const response = await fetch("https://script.google.com/macros/s/AKfycbyDKRiAO2JpD1hwkzVFAEM2XnzMRjy6wq5MYZ3PqF47_M5k4aaZ-CuxS940HW5q-MkX/exec", {
       method: "POST",
-      mode: "no-cors",/* 일단 전송! 추가한 코드임*/
       headers: {
         "Content-Type": "application/json"
       },
@@ -885,15 +884,7 @@ recallForm.addEventListener("submit", async (event) => {
         participantInfo,
         surveyResponses,
         shownNotifications,
-        score,
-        freeRecallText,
-        colorRecallText,
-        mostNoticeableColor,
-        mostNoticeableReason,
-        mentalEffort,
-        timePressure,
-        attentionDemand,
-        shownNotifications
+        score
       })
     });
 
