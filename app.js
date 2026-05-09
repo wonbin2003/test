@@ -885,7 +885,15 @@ recallForm.addEventListener("submit", async (event) => {
         participantInfo,
         surveyResponses,
         shownNotifications,
-        score
+        score,
+        freeRecallText,
+        colorRecallText,
+        mostNoticeableColor,
+        mostNoticeableReason,
+        mentalEffort,
+        timePressure,
+        attentionDemand,
+        shownNotifications
       })
     });
 
