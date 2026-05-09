@@ -903,7 +903,7 @@ recallForm.addEventListener("submit", async (event) => {
   console.error("전송 에러:", error);
   createSummary();
   showScreen(resultScreen);
-}}
+}});
 
 /* ==============================
    결과 요약 생성
